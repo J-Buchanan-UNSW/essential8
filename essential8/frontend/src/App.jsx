@@ -20,6 +20,7 @@ import Wizard from "./Wizard.jsx";
 import Step1 from "./wizard/Business.jsx";
 import Step0 from "./wizard/Step0Intro.jsx";
 import Business from "./wizard/Business.jsx";
+import Login from "./auth/Login.jsx";
 
 function App() {
   return (
@@ -27,10 +28,17 @@ function App() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography 
+              variant="h6" 
+              component="div" 
+              sx={{ flexGrow: 1 }}
+              component={Link}
+              to="/"
+              sx={{ textDecoration: 'none', color: 'inherit', flexGrow: 1, textAlign: 'center' }}
+            >
               Essential 8
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" component={Link} to="/login">Login</Button>
           </Toolbar>
         </AppBar>
       </Box>
