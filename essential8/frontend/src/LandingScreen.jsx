@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useProject } from "./projects/useProject";
 
 export default function LandingScreen() {
   return (

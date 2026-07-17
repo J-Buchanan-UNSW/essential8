@@ -1,7 +1,16 @@
 import { Box, Paper, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { useProject } from "./projects/useProject";
 
 export default function Wizard() {
+
+    const { project, createProject } = useProject();
+    useEffect(() => {
+        if (!project) {
+            createProject();
+        }
+    }, [project]);
   return (
     <Box
       sx={{

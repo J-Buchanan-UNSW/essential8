@@ -21,24 +21,46 @@ import Step1 from "./wizard/Business.jsx";
 import Step0 from "./wizard/Step0Intro.jsx";
 import Business from "./wizard/Business.jsx";
 import Login from "./auth/Login.jsx";
+import ProtectedRoute from "./auth/ProtectedRoute.jsx";
+import { signOut } from "aws-amplify/auth";
+import { useAuth } from "./auth/useAuth";
 
 function App() {
+  const { authenticated } = useAuth();
+
+  async function logout() {
+    await signOut({
+      global: true,
+    });
+  }
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography 
-              variant="h6" 
-              component="div" 
-              sx={{ flexGrow: 1 }}
+            <Typography
+              variant="h6"
               component={Link}
               to="/"
-              sx={{ textDecoration: 'none', color: 'inherit', flexGrow: 1, textAlign: 'center' }}
+              sx={{
+                textDecoration: "none",
+                color: "inherit",
+                flexGrow: 1,
+                textAlign: "center",
+              }}
             >
               Essential 8
             </Typography>
-            <Button color="inherit" component={Link} to="/login">Login</Button>
+            {authenticated ? (
+              <Button color="inherit" onClick={logout}>
+                Logout
+              </Button>
+            ) : (
+              <Button color="inherit" component={Link} to="/login">
+                Login
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
       </Box>
@@ -46,7 +68,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingScreen />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/wizard" element={<Wizard />}>
+        <Route
+          path="/wizard"
+          element={
+            <ProtectedRoute>
+              <Wizard />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Step0 />} />
           <Route path="business" element={<Business />} />
         </Route>

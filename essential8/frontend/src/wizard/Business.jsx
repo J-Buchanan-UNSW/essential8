@@ -11,18 +11,16 @@ export default function Business() {
         py: 2,
       }}
     >
-      <Box>
+      <Box
+        sx={{
+            display: "flex",
+            flexDirection: "column",
+
+            alignItems: "center"
+        }}
+      >
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           Tell us about your organisation
-        </Typography>
-
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{ maxWidth: 650 }}
-        >
-          We'll use this information to tailor your Essential Eight
-          implementation roadmap. This should only take a minute.
         </Typography>
       </Box>
 

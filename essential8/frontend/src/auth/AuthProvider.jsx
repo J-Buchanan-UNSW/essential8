@@ -1,32 +1,54 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { Hub } from "aws-amplify/utils";
+import { getCurrentUser } from "aws-amplify/auth";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  const login = (user) => {
-    setUser(user);
-  };
+    async function refreshUser() {
+        try {
+            const currentUser = await getCurrentUser();
+            setUser(currentUser);
+        } catch {
+            setUser(null);
+        } finally {
+            setLoading(false);
+        }
+    }
 
-  const logout = () => {
-    setUser(null);
-  };
+    useEffect(() => {
+        refreshUser();
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        login,
-        logout,
-        authenticated: !!user,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-}
+        const unsubscribe = Hub.listen("auth", ({ payload }) => {
+            switch (payload.event) {
+                case "signedIn":
+                    refreshUser();
+                    break;
 
-export function useAuth() {
-  return useContext(AuthContext);
+                case "signedOut":
+                    setUser(null);
+                    break;
+
+                default:
+                    break;
+            }
+        });
+
+        return unsubscribe;
+    }, []);
+
+    return (
+        <AuthContext.Provider
+            value={{
+                user,
+                authenticated: !!user,
+                loading,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    );
 }
