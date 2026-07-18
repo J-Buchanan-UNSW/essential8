@@ -1,30 +1,59 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import * as projectApi from "../api/projectApi";
 
 export const ProjectContext = createContext();
 
 export function ProjectProvider({ children }) {
+  const [project, setProject] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const [project, setProject] = useState(null);
+  async function createProject() {
+    setIsLoading(true);
+    const project = await projectApi.createProject();
 
-    function createProject() {
-        const newProject = {
-            id: crypto.randomUUID(), 
-            createdAt: new Date().toISOString(),
-            answers: {}
-        }
+    setProject(project);
 
-        setProject(newProject);
+    setIsLoading(false);
+    return project;
+  }
 
-        return newProject;
+  async function updateAnswers(newAnswers) {
+    if (!project) {
+      throw new Error("No active project");
     }
-    return (
-        <ProjectContext.Provider 
-            value={{
-                project, 
-                createProject
-            }}
-        >
-            {children}
-        </ProjectContext.Provider>
-    )
+    const updatedProject = await projectApi.updateProject(project.id, {
+      answers: newAnswers,
+    });
+
+    setProject(updatedProject);
+
+    return updatedProject;
+  }
+
+  async function updateProject(updates) {
+    if (!project) {
+      throw new Error("No active project");
+    }
+
+    const updatedProject = await projectApi.updateProject(project.id, updates);
+
+    setProject(updatedProject);
+
+    return updatedProject;
+  }
+
+  return (
+    <ProjectContext.Provider
+      value={{
+        project,
+        isLoading,
+        createProject,
+        setProject,
+        updateAnswers,
+        updateProject,
+      }}
+    >
+      {children}
+    </ProjectContext.Provider>
+  );
 }

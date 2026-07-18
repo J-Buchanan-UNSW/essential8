@@ -24,6 +24,18 @@ import Login from "./auth/Login.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import { signOut } from "aws-amplify/auth";
 import { useAuth } from "./auth/useAuth";
+import Projects from "./Projects.jsx";
+import MFA from "./wizard/MFA.jsx";
+import Setup from "./wizard/Setup.jsx";
+import AppControl from "./wizard/AppControl.jsx";
+import Patch from "./wizard/Patch.jsx";
+import Os from "./wizard/Os.jsx";
+import Macros from "./wizard/Macros.jsx";
+import AppHardening from "./wizard/AppHardening.jsx";
+import Admin from "./wizard/Admin.jsx";
+import Backups from "./wizard/Backups.jsx";
+import Finalise from "./wizard/Finalise.jsx";
+import Project from "./Project.jsx";
 
 function App() {
   const { authenticated } = useAuth();
@@ -36,7 +48,7 @@ function App() {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box>
         <AppBar position="static">
           <Toolbar>
             <Typography
@@ -53,9 +65,14 @@ function App() {
               Essential 8
             </Typography>
             {authenticated ? (
-              <Button color="inherit" onClick={logout}>
-                Logout
-              </Button>
+              <>
+                <Button color="inherit" component={Link} to="/projects">
+                  Projects
+                </Button>
+                <Button color="inherit" onClick={logout}>
+                  Logout
+                </Button>
+              </>
             ) : (
               <Button color="inherit" component={Link} to="/login">
                 Login
@@ -77,8 +94,34 @@ function App() {
           }
         >
           <Route index element={<Step0 />} />
+          <Route path="setup" element={<Setup />} />
           <Route path="business" element={<Business />} />
+          <Route path="mfa" element={<MFA />} />
+          <Route path="app-control" element={<AppControl />} />
+          <Route path="patch" element={<Patch />} />
+          <Route path="os" element={<Os />} />
+          <Route path="macros" element={<Macros />} />
+          <Route path="application-hardening" element={<AppHardening />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="backups" element={<Backups />} />
+          <Route path="finalise" element={<Finalise />} />
         </Route>
+        <Route
+          path="/projects"
+          element={
+            <ProtectedRoute>
+              <Projects />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/project"
+          element={
+            <ProtectedRoute>
+              <Project />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

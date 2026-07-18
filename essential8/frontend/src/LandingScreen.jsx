@@ -43,7 +43,7 @@ export default function LandingScreen() {
       >
         <Button
           component={Link}
-          to="/wizard"
+          to="/projects"
           variant="contained"
           size="large"
           sx={{

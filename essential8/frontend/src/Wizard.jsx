@@ -1,16 +1,22 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useProject } from "./projects/useProject";
+import { LoadingScreen } from "./LoadingScreen";
 
 export default function Wizard() {
+  const { project, isLoading, updateAnswers } = useProject();
 
-    const { project, createProject } = useProject();
-    useEffect(() => {
-        if (!project) {
-            createProject();
-        }
-    }, [project]);
+  const navigate = useNavigate();
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
+  if (!project) {
+    navigate("/projects");
+  }
+
   return (
     <Box
       sx={{

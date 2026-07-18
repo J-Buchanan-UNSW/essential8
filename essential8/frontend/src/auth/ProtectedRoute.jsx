@@ -6,17 +6,11 @@ export default function ProtectedRoute({ children }) {
   const location = useLocation();
 
   if (loading) {
-    return null
+    return null;
   }
 
   if (!authenticated) {
-    return (
-        <Navigate 
-            to="/login" 
-            state={{ from: location.pathname}}
-            replace 
-        />
-    );
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
   return children;

@@ -35,7 +35,7 @@ export default function Step0() {
 
       <Button
         component={Link}
-        to="/wizard/business"
+        to="/wizard/setup"
         variant="contained"
         size="large"
         sx={{

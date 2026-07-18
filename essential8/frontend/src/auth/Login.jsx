@@ -3,10 +3,9 @@ import { useLocation } from "react-router-dom";
 import { signInWithRedirect } from "aws-amplify/auth";
 
 export default function Login() {
+  const location = useLocation();
 
-    const location = useLocation();
-
-    const redirectTo = location.state?.from ?? "/";
+  const redirectTo = location.state?.from ?? "/";
 
   const login = async () => {
     await signInWithRedirect({
