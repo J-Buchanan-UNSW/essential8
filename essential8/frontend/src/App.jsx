@@ -36,6 +36,8 @@ import Admin from "./wizard/Admin.jsx";
 import Backups from "./wizard/Backups.jsx";
 import Finalise from "./wizard/Finalise.jsx";
 import Project from "./Project.jsx";
+import Control from "./components/Control.jsx";
+import Guide from "./Guide.jsx";
 
 function App() {
   const { authenticated } = useAuth();
@@ -122,6 +124,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/project/:controlId" element={<Control />} />
+        <Route path="/project/:controlId/:guideId" element={<Guide />} />
       </Routes>
     </>
   );

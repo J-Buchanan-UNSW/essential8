@@ -42,6 +42,14 @@ export function ProjectProvider({ children }) {
     return updatedProject;
   }
 
+  async function getReport() {
+    if (!project) {
+      throw new Error("No active project");
+    }
+
+    return await projectApi.getProjectReport(project.id);
+  }
+
   return (
     <ProjectContext.Provider
       value={{
@@ -51,6 +59,7 @@ export function ProjectProvider({ children }) {
         setProject,
         updateAnswers,
         updateProject,
+        getReport,
       }}
     >
       {children}

@@ -88,7 +88,7 @@ export default function Projects() {
           justifyContent: "space-between",
           alignItems: "center",
           mb: 4,
-          mt: 4
+          mt: 4,
         }}
       >
         <Typography variant="h4" fontWeight="bold">
@@ -153,14 +153,6 @@ export default function Projects() {
                       sx={{ mb: 1, fontWeight: 600 }}
                     >
                       {project.name || "Untitled Project"}
-                    </Typography>
-
-                    <Typography
-                      variant="caption"
-                      color="text.secondary"
-                      display="block"
-                    >
-                      ID: {project.id.substring(0, 8)}...
                     </Typography>
 
                     <Typography

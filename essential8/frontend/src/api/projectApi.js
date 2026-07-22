@@ -98,7 +98,7 @@ export async function getProjectReport(projectId) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
   if (!response.ok) {

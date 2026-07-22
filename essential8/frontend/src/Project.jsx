@@ -10,19 +10,17 @@ import ControlsList from "./components/ControlsList";
 import OrganisationCard from "./components/OrganisationCard";
 
 export default function Project() {
-  const { project } = useProject();
+  const { project, getReport } = useProject();
   const [report, setReport] = useState(null);
 
   useEffect(() => {
-    if (!project) return;
-
-    async function loadReport() {
-      const result = await getProjectReport(project.id);
-      setReport(result);
-    }
-
     loadReport();
   }, [project]);
+
+  async function loadReport() {
+    const report = await getReport();
+    setReport(report);
+  }
 
   if (!report) {
     return <LoadingScreen />;
@@ -30,7 +28,9 @@ export default function Project() {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+
       <Grid container spacing={3}>
+        
         <Grid size={{ xs: 12 }}>
           <OverallMaturityCard level={report.overallLevel} />
         </Grid>
