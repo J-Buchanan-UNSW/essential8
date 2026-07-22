@@ -27,18 +27,19 @@ async function createProject(req, res) {
 
 }
 
-function getCurrentProject(req, res) {
-    const project = projects.find(
-        (project) => project.owner === req.user.sub
-    );
+async function getProject(req, res) {
+  const project = await projectRepository.getProjectById(
+    req.params.id,
+    req.user.sub
+  );
 
-    if (!project) {
-        return res.status(404).json({
-            message: "No project found",
-        });
-    }
+  if (!project) {
+    return res.status(404).json({
+      message: "Project not found",
+    });
+  }
 
-    res.json(project);
+  res.json(project);
 }
 
 async function getProjects(req, res) {
@@ -126,7 +127,7 @@ async function getProjectReport(req, res) {
 
 module.exports = {
     createProject,
-    getCurrentProject, 
+    getProject, 
     getProjects, 
     updateProject, 
     getProjectReport

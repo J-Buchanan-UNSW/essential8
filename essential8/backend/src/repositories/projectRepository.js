@@ -103,6 +103,8 @@ async function updateProject(project) {
     return mapProject(result.rows[0]);
 }
 
+
+
 module.exports = {
     createProject,
     getProjectsByOwner, 
