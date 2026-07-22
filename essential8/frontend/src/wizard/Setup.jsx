@@ -1,14 +1,15 @@
 import { Box, Typography, TextField, Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function Setup() {
   const { project, isLoading, updateProject } = useProject();
 
   const [projectName, setProjectName] = useState("");
-  const navigate = useNavigate();
+  const { goTo } = useWizardNavigation();
 
   useEffect(() => {
     if (!project) return;
@@ -21,7 +22,7 @@ export default function Setup() {
       name: projectName,
     });
 
-    navigate("/wizard/business");
+    goTo("business");
   }
 
   async function handleBack() {
@@ -29,7 +30,7 @@ export default function Setup() {
       name: projectName,
     });
 
-    navigate("/wizard/");
+    goTo("");
   }
 
   if (isLoading) {

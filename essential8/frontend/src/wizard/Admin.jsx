@@ -8,10 +8,11 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
+
 
 export default function Admin() {
   const { project, isLoading, updateAnswers } = useProject();
@@ -20,8 +21,7 @@ export default function Admin() {
   const [separateAccounts, setSeparateAccounts] = useState("");
   const [adminUsage, setAdminUsage] = useState("");
   const [reviewProcess, setReviewProcess] = useState("");
-
-  const navigate = useNavigate();
+  const { goTo } = useWizardNavigation();
 
   useEffect(() => {
     if (!project) return;
@@ -44,7 +44,7 @@ export default function Admin() {
       },
     });
 
-    navigate("/wizard/backups");
+    goTo("backups");
   }
 
   async function handleBack() {
@@ -57,7 +57,7 @@ export default function Admin() {
       },
     });
 
-    navigate("/wizard/application-hardening");
+    goTo("application-hardening");
   }
 
   if (isLoading) {

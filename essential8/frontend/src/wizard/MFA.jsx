@@ -8,10 +8,11 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function MFA() {
   const { project, isLoading, updateAnswers } = useProject();
@@ -19,7 +20,7 @@ export default function MFA() {
   const [adminMfa, setAdminMfa] = useState("");
   const [usersMfa, setUsersMfa] = useState("");
   const [exemptMfa, setExemptMfa] = useState("");
-  const navigate = useNavigate();
+  const { goTo } = useWizardNavigation();
 
   useEffect(() => {
     if (!project) return;
@@ -38,7 +39,7 @@ export default function MFA() {
       },
     });
 
-    navigate("/wizard/app-control");
+    goTo("app-control");
   }
 
   async function handleBack() {
@@ -50,7 +51,7 @@ export default function MFA() {
       },
     });
 
-    navigate("/wizard/business");
+    goTo("business");
   }
 
   if (isLoading) {

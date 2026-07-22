@@ -3,7 +3,8 @@ const cors = require("cors");
 
 const healthRoutes = require("./routes/health.routes");
 const projectRoutes = require("./routes/project.routes");
-const authRoutes = require("./routes/auth.routes")
+const authRoutes = require("./routes/auth.routes");
+const testConnection = require("./db/testConnection");
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(cors({
     origin: process.env.FRONTEND_URL,
 }));
 
-console.log("Env URL: ", process.env.FRONTEND_URL)
+testConnection();
 
 app.use(express.json());
 

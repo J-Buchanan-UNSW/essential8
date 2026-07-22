@@ -9,9 +9,7 @@ async function testConnection() {
         console.log(result.rows[0]);
     } catch (err) {
         console.error(err);
-    } finally {
-        process.exit();
-    }
+    } 
 }
 
-testConnection();
+module.exports = testConnection

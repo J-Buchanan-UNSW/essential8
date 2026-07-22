@@ -30,6 +30,8 @@ async function createProject(project) {
 }
 
 async function getProjectsByOwner(owner) {
+    console.log("Repository: before SQL");
+
     const result = await db.query(
         `
         SELECT *
@@ -39,6 +41,8 @@ async function getProjectsByOwner(owner) {
         `,
         [owner]
     );
+
+    console.log("Repository: after SQL");
 
     return result.rows.map(mapProject);
 }

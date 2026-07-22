@@ -10,11 +10,13 @@ import { ProjectProvider } from "./projects/ProjectProvider.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <ProjectProvider>
+
         <BrowserRouter>
+              <ProjectProvider>
           <App />
+                </ProjectProvider>
         </BrowserRouter>
-      </ProjectProvider>
+
     </AuthProvider>
   </StrictMode>,
 );

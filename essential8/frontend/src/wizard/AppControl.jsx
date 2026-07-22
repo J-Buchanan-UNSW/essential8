@@ -8,10 +8,10 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function AppControl() {
   const { project, isLoading, updateAnswers } = useProject();
@@ -20,8 +20,7 @@ export default function AppControl() {
   const [approvedApp, setApprovedApp] = useState("");
   const [blocked, setBlocked] = useState("");
   const [control, setControl] = useState("");
-
-  const navigate = useNavigate();
+  const { goTo } = useWizardNavigation();
 
   useEffect(() => {
     if (!project) return;
@@ -36,14 +35,14 @@ export default function AppControl() {
     await updateAnswers({
       appControl: { install, approvedApp, blocked, control },
     });
-    navigate("/wizard/patch");
+    goTo("patch");
   }
 
   async function handleBack() {
     await updateAnswers({
       appControl: { install, approvedApp, blocked, control },
     });
-    navigate("/wizard/mfa");
+    goTo("mfa");
   }
 
   if (isLoading) {

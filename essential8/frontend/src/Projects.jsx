@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { createProject, setProject } = useProject();
+  const { createProject } = useProject();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,17 +41,21 @@ export default function Projects() {
   }
 
   async function handleCreateProject() {
-    await createProject();
-    navigate("/wizard");
+    try {
+      const project = await projectApi.createProject();
+      navigate(`/wizard/${project.id}`);
+    } catch (err) {
+      console.log("Failed to make project", err)
+    }
+
   }
 
   async function handleProjectClick(project) {
-    setProject(project);
 
     if (project.status === "Draft") {
-      navigate("/wizard");
+      navigate(`/wizard/${project.id}`);
     } else {
-      navigate("/project");
+      navigate(`/project/${project.id}`);
     }
   }
 

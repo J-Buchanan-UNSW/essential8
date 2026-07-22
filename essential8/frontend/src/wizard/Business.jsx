@@ -1,8 +1,9 @@
 import { Box, Typography, TextField, Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function Business() {
   const { project, isLoading, updateAnswers } = useProject();
@@ -10,8 +11,7 @@ export default function Business() {
   const [businessName, setBusinessName] = useState("");
   const [industry, setIndustry] = useState("");
   const [employees, setEmployees] = useState("");
-  const navigate = useNavigate();
-
+  const { goTo } = useWizardNavigation();
   useEffect(() => {
     if (!project) return;
 
@@ -29,7 +29,7 @@ export default function Business() {
       },
     });
 
-    navigate("/wizard/mfa");
+    goTo("mfa");
   }
 
   async function handleBack() {
@@ -41,7 +41,7 @@ export default function Business() {
       },
     });
 
-    navigate("/wizard/setup");
+    goTo("setup");
   }
 
   if (isLoading) {

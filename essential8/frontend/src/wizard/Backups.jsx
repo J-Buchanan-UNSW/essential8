@@ -8,10 +8,10 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function Backups() {
   const { project, isLoading, updateAnswers } = useProject();
@@ -22,7 +22,7 @@ export default function Backups() {
   const [restoration, setRestoration] = useState("");
   const [ransomwareProtection, setRansomwareProtection] = useState("");
 
-  const navigate = useNavigate();
+  const { goTo } = useWizardNavigation();
 
   useEffect(() => {
     if (!project) return;
@@ -47,7 +47,7 @@ export default function Backups() {
       },
     });
 
-    navigate("/wizard/finalise");
+    goTo("finalise");
   }
 
   async function handleBack() {

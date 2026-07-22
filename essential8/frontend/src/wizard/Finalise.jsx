@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function Finalise() {
   const { project, isLoading, updateProject } = useProject();
   const navigate = useNavigate();
+  const { goTo } = useWizardNavigation();
 
   async function handleNext() {
     await updateProject({
@@ -17,7 +19,7 @@ export default function Finalise() {
   }
 
   async function handleBack() {
-    navigate("/wizard/backups");
+    goTo("backups");
   }
 
   if (isLoading) {

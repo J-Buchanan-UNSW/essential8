@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Container, Grid } from "@mui/material";
 
 import { LoadingScreen } from "./LoadingScreen";
-import { useProject } from "./projects/useProject";
-import { getProjectReport } from "./api/projectApi";
+import * as projectApi from "./api/projectApi";
 
 import OverallMaturityCard from "./components/OverallMaturityCard";
 import ControlsList from "./components/ControlsList";
 import OrganisationCard from "./components/OrganisationCard";
 
 export default function Project() {
-  const { project, getReport } = useProject();
+  const { projectId } = useParams();
+
   const [report, setReport] = useState(null);
 
   useEffect(() => {
     loadReport();
-  }, [project]);
+  }, [projectId]);
 
   async function loadReport() {
-    const report = await getReport();
+    const report = await projectApi.getProjectReport(projectId);
+
     setReport(report);
   }
 
@@ -28,9 +30,8 @@ export default function Project() {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-
       <Grid container spacing={3}>
-        
+
         <Grid size={{ xs: 12 }}>
           <OverallMaturityCard level={report.overallLevel} />
         </Grid>
@@ -42,6 +43,7 @@ export default function Project() {
         <Grid size={{ xs: 12, md: 4 }}>
           <OrganisationCard organisation={report.organisation} />
         </Grid>
+
       </Grid>
     </Container>
   );

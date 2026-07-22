@@ -8,7 +8,7 @@ import {
   Chip,
   Box
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const levelColors = {
   0: "#b71c1c",
@@ -20,7 +20,7 @@ const levelColors = {
 
 export default function ControlsList({ controls }) {
   const navigate = useNavigate();
-
+  const { projectId } = useParams();
   return (
     <Card
       elevation={4}
@@ -38,7 +38,7 @@ export default function ControlsList({ controls }) {
           {controls.map((control) => (
             <ListItemButton
               key={control.id}
-              onClick={() => navigate(`/project/${control.id}`)}
+              onClick={() => navigate(`/project/${projectId}/${control.id}`)}
               sx={{
                 mb: 1,
                 borderRadius: 2,

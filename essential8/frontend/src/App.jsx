@@ -38,6 +38,7 @@ import Finalise from "./wizard/Finalise.jsx";
 import Project from "./Project.jsx";
 import Control from "./components/Control.jsx";
 import Guide from "./Guide.jsx";
+import WizardPage from "./WizardPage.jsx";
 
 function App() {
   const { authenticated } = useAuth();
@@ -88,10 +89,10 @@ function App() {
         <Route path="/" element={<LandingScreen />} />
         <Route path="/login" element={<Login />} />
         <Route
-          path="/wizard"
+          path="/wizard/:projectId"
           element={
             <ProtectedRoute>
-              <Wizard />
+              <WizardPage />
             </ProtectedRoute>
           }
         >
@@ -117,15 +118,15 @@ function App() {
           }
         />
         <Route
-          path="/project"
+          path="/project/:projectId"
           element={
             <ProtectedRoute>
               <Project />
             </ProtectedRoute>
           }
         />
-        <Route path="/project/:controlId" element={<Control />} />
-        <Route path="/project/:controlId/:guideId" element={<Guide />} />
+        <Route path="/project/:projectId/:controlId" element={<Control />} />
+        <Route path="/project/:projectId/:controlId/:guideId" element={<Guide />} />
       </Routes>
     </>
   );

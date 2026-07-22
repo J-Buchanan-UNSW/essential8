@@ -8,10 +8,10 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useProject } from "../projects/useProject";
 import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function AppHardening() {
   const { project, isLoading, updateAnswers } = useProject();
@@ -20,8 +20,7 @@ export default function AppHardening() {
   const [browserSecurity, setBrowserSecurity] = useState("");
   const [extensions, setExtensions] = useState("");
   const [pdfSecurity, setPdfSecurity] = useState("");
-
-  const navigate = useNavigate();
+  const { goTo } = useWizardNavigation();
 
   useEffect(() => {
     if (!project) return;
@@ -42,7 +41,7 @@ export default function AppHardening() {
       },
     });
 
-    navigate("/wizard/admin");
+    goTo("admin");
   }
 
   async function handleBack() {
@@ -55,7 +54,7 @@ export default function AppHardening() {
       },
     });
 
-    navigate("/wizard/macros");
+    goTo("macros");
   }
 
   if (isLoading) {

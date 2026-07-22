@@ -43,19 +43,23 @@ async function getProject(req, res) {
 }
 
 async function getProjects(req, res) {
+    console.log("Controller: entered");
+
     try {
+        console.log("Controller: before repository");
+
         const projects = await projectRepository.getProjectsByOwner(req.user.sub);
+
+        console.log("Controller: repository returned");
 
         res.json(projects);
     } catch (err) {
         console.error(err);
-
         res.status(500).json({
             message: "Failed to load projects",
         });
     }
 }
-
 async function updateProject(req, res) {
     try {
         const project = await projectRepository.getProjectById(

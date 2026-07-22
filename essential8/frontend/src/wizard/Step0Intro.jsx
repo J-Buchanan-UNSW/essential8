@@ -1,7 +1,9 @@
 import { Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useWizardNavigation } from "./useWizardNavigation";
 
 export default function Step0() {
+  const { goTo } = useWizardNavigation();
   return (
     <Box
       sx={{
@@ -34,8 +36,7 @@ export default function Step0() {
       </Typography>
 
       <Button
-        component={Link}
-        to="/wizard/setup"
+        onClick={() => goTo("setup")}
         variant="contained"
         size="large"
         sx={{
