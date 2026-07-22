@@ -12,9 +12,9 @@ Amplify.configure({
 
           scopes: ["openid", "email", "profile"],
 
-          redirectSignIn: ["http://localhost:5173"],
+          redirectSignIn: [import.meta.env.VITE_REDIRECT_SIGN_IN],
 
-          redirectSignOut: ["http://localhost:5173"],
+          redirectSignOut: [import.meta.env.VITE_REDIRECT_SIGN_OUT],
 
           responseType: "code",
         },

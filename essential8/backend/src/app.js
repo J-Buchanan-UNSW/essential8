@@ -8,8 +8,12 @@ const testConnection = require("./db/testConnection");
 
 const app = express();
 
+const allowed = [
+    process.env.AMPLIFY_URL, 
+    process.env.FRONTEND_URL,
+]
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: allowed
 }));
 
 testConnection();
