@@ -1,8 +1,6 @@
 const { evaluateProject } = require("../services/evaluation/evaluateProject");
 const projectRepository = require("../repositories/projectRepository");
 
-const projects = [];
-
 async function createProject(req, res) {
     try {
         const project = {
