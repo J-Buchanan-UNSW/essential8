@@ -2,7 +2,7 @@ const RULES_MACRO_SETTINGS = [
     {
         id: "trusted-locations",
         description: "Macros only run from trusted locations",
-        passes: a => a.macroRun === "trusted",
+        passes: a => a.macroRun === "trusted" || a.macroRun === "disabled",
     },
     {
         id: "block-internet",
@@ -26,7 +26,7 @@ function evaluateMacroSettings(answers) {
     const remaining = [];
 
     for (const rule of RULES_MACRO_SETTINGS) {
-        (rule.passes(answers) ? completed : remaining).push(rule.description);
+        (rule.passes(answers) ? completed : remaining).push(rule);
     }
 
     return {

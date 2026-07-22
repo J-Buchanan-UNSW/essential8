@@ -26,7 +26,7 @@ function evaluateAppControl(answers) {
     const remaining = [];
 
     for (const rule of RULES_APP_CONTROL) {
-        (rule.passes(answers) ? completed : remaining).push(rule.description);
+        (rule.passes(answers) ? completed : remaining).push(rule);
     }
 
     return {

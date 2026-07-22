@@ -2,7 +2,7 @@ const RULES_ADMIN_PRIVILEGES = [
     {
         id: "admin-rights",
         description: "Administrator rights are limited",
-        passes: a => a.adminRights === "limited",
+        passes: a => a.adminRights === "no",
     },
     {
         id: "separate-accounts",
@@ -12,7 +12,7 @@ const RULES_ADMIN_PRIVILEGES = [
     {
         id: "restricted-usage",
         description: "Admin accounts used only when necessary",
-        passes: a => a.adminUsage === "restricted",
+        passes: a => a.adminUsage === "always",
     },
     {
         id: "review-process",
@@ -26,7 +26,7 @@ function evaluateAdminPrivileges(answers) {
     const remaining = [];
 
     for (const rule of RULES_ADMIN_PRIVILEGES) {
-        (rule.passes(answers) ? completed : remaining).push(rule.description);
+        (rule.passes(answers) ? completed : remaining).push(rule);
     }
 
     return {

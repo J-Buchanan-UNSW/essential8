@@ -2,12 +2,12 @@ const RULES_PATCH_OS = [
     {
         id: "patch-speed",
         description: "Operating systems patched within one month",
-        passes: a => a.speed === "1m",
+        passes: a => a.speed === "1m" || a.speed === "48h",
     },
     {
         id: "auto-updates",
         description: "Automatic OS updates enabled",
-        passes: a => a.autoUpdates === "all",
+        passes: a => a.autoUpdates === "yes",
     },
     {
         id: "unsupported-removed",
@@ -26,7 +26,7 @@ function evaluatePatchOS(answers) {
     const remaining = [];
 
     for (const rule of RULES_PATCH_OS) {
-        (rule.passes(answers) ? completed : remaining).push(rule.description);
+        (rule.passes(answers) ? completed : remaining).push(rule);
     }
 
     return {

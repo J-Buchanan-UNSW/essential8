@@ -7,7 +7,7 @@ const RULES_USER_HARDENING = [
     {
         id: "browser-security",
         description: "Browser security settings fully enforced",
-        passes: a => a.browserSecurity === "all",
+        passes: a => a.browserSecurity === "yes",
     },
     {
         id: "approved-extensions",
@@ -17,7 +17,7 @@ const RULES_USER_HARDENING = [
     {
         id: "pdf-security",
         description: "PDF security settings fully enforced",
-        passes: a => a.pdfSecurity === "all",
+        passes: a => a.pdfSecurity === "yes",
     },
 ];
 
@@ -26,7 +26,7 @@ function evaluateUserHardening(answers) {
     const remaining = [];
 
     for (const rule of RULES_USER_HARDENING) {
-        (rule.passes(answers) ? completed : remaining).push(rule.description);
+        (rule.passes(answers) ? completed : remaining).push(rule);
     }
 
     return {

@@ -24,9 +24,9 @@ function evaluateMfa(answers) {
     for (const rule of RULES) {
 
         if (rule.passes(answers)) {
-            completed.push(rule.description);
+            completed.push(rule);
         } else {
-            remaining.push(rule.description);
+            remaining.push(rule);
         }
     }
 

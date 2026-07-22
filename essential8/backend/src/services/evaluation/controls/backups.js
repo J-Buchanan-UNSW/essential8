@@ -2,7 +2,7 @@ const RULES_BACKUPS = [
     {
         id: "frequency",
         description: "Backups performed daily",
-        passes: a => a.frequency === "daily",
+        passes: a => a.frequency === "daily" ||  a.frequency === "multiDaily",
     },
     {
         id: "separate-storage",
@@ -31,7 +31,7 @@ function evaluateBackups(answers) {
     const remaining = [];
 
     for (const rule of RULES_BACKUPS) {
-        (rule.passes(answers) ? completed : remaining).push(rule.description);
+        (rule.passes(answers) ? completed : remaining).push(rule);
     }
 
     return {

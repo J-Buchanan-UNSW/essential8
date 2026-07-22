@@ -2,7 +2,7 @@ const RULES_PATCH_APPLICATIONS = [
     {
         id: "patch-speed",
         description: "Applications patched within one month",
-        passes: a => a.speed === "1m",
+        passes: a => a.speed === "1m" || a.speed === "48h",
     },
     {
         id: "auto-updates",
@@ -26,7 +26,7 @@ function evaluatePatchApplications(answers) {
     const remaining = [];
 
     for (const rule of RULES_PATCH_APPLICATIONS) {
-        (rule.passes(answers) ? completed : remaining).push(rule.description);
+        (rule.passes(answers) ? completed : remaining).push(rule);
     }
 
     return {
