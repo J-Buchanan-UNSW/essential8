@@ -13,7 +13,6 @@ import { useState, useEffect } from "react";
 import { LoadingScreen } from "../LoadingScreen";
 import { useWizardNavigation } from "./useWizardNavigation";
 
-
 export default function Admin() {
   const { project, isLoading, updateAnswers } = useProject();
 

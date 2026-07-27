@@ -44,7 +44,7 @@ export default function Control() {
     return <NotFound />;
   }
 
-  const control = report.controls.find(c => c.id === controlId);
+  const control = report.controls.find((c) => c.id === controlId);
 
   if (!control) {
     return <NotFound />;
@@ -136,8 +136,8 @@ export default function Control() {
                 backgroundColor: "#fff3e0",
                 border: "1px solid #ffe0b2",
               }}
-                onClick={() =>
-                  navigate(`/project/${projectId}/${controlId}/${item.id}`)
+              onClick={() =>
+                navigate(`/project/${projectId}/${controlId}/${item.id}`)
               }
             >
               <Checkbox disabled />

@@ -14,10 +14,10 @@ export default function NotFound() {
       <Stack
         justifyContent="center"
         alignItems="center"
-        sx={{ 
-            minHeight: "80vh",
-            marginTop: "10vh"
-         }}
+        sx={{
+          minHeight: "80vh",
+          marginTop: "10vh",
+        }}
       >
         <Card elevation={4} sx={{ width: "100%", borderRadius: 3 }}>
           <CardContent sx={{ p: 6, textAlign: "center" }}>
@@ -34,18 +34,11 @@ export default function NotFound() {
               Page Not Found
             </Typography>
 
-            <Typography
-              color="text.secondary"
-              sx={{ mt: 2, mb: 4 }}
-            >
+            <Typography color="text.secondary" sx={{ mt: 2, mb: 4 }}>
               Sorry, we couldn't find the page you requested.
             </Typography>
 
-            <Button
-              component={RouterLink}
-              to="/"
-              variant="contained"
-            >
+            <Button component={RouterLink} to="/" variant="contained">
               Back Home
             </Button>
           </CardContent>

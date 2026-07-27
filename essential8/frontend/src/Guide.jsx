@@ -1,12 +1,30 @@
-import { useParams } from "react-router-dom";
+import { Button, Container } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import NotFound from "./NotFound";
+import AdminMfaGuide from "./guides/mfa/AdminMfaGuide";
 
 export default function Guide() {
-    const { controlId, guideId } = useParams();
-    console.log(controlId, guideId);
+  const { projectId, controlId, guideId } = useParams();
+  const navigate = useNavigate();
+  console.log(controlId, guideId);
+  console.log(controlId === "admin-mfa");
+  const guides = {
+    "admin-mfa": AdminMfaGuide,
+  };
 
-    return (
-        <>
-            <h1>Guide</h1>
-        </>
-    )
+  let ReturnedPage = guides[guideId] || NotFound;
+
+  return (
+    <>
+      <Container sx={{ py: 4 }}>
+        <Button
+          variant="outlined"
+          onClick={() => navigate(`/project/${projectId}/${controlId}`)}
+        >
+          Back
+        </Button>
+      </Container>
+      <ReturnedPage />
+    </>
+  );
 }

@@ -31,7 +31,6 @@ export default function Project() {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={3}>
-
         <Grid size={{ xs: 12 }}>
           <OverallMaturityCard level={report.overallLevel} />
         </Grid>
@@ -43,7 +42,6 @@ export default function Project() {
         <Grid size={{ xs: 12, md: 4 }}>
           <OrganisationCard organisation={report.organisation} />
         </Grid>
-
       </Grid>
     </Container>
   );

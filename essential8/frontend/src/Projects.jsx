@@ -45,13 +45,11 @@ export default function Projects() {
       const project = await projectApi.createProject();
       navigate(`/wizard/${project.id}`);
     } catch (err) {
-      console.log("Failed to make project", err)
+      console.log("Failed to make project", err);
     }
-
   }
 
   async function handleProjectClick(project) {
-
     if (project.status === "Draft") {
       navigate(`/wizard/${project.id}`);
     } else {

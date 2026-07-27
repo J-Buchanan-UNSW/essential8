@@ -72,17 +72,14 @@ export async function updateProject(projectId, updates) {
 
   const token = session.tokens.accessToken.toString();
 
-  const response = await fetch(
-    `${url}/api/projects/${projectId}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(updates),
+  const response = await fetch(`${url}/api/projects/${projectId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-  );
+    body: JSON.stringify(updates),
+  });
 
   if (!response.ok) {
     throw new Error("Failed to update project");
@@ -95,14 +92,11 @@ export async function getProjectReport(projectId) {
   const session = await fetchAuthSession();
   const token = session.tokens.accessToken.toString();
 
-  const response = await fetch(
-    `${url}/api/projects/${projectId}/report`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const response = await fetch(`${url}/api/projects/${projectId}/report`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
 
   if (!response.ok) {
     throw new Error("Failed to load project report");
@@ -112,17 +106,14 @@ export async function getProjectReport(projectId) {
 }
 
 export async function getProject(projectId) {
-    const session = await fetchAuthSession();
+  const session = await fetchAuthSession();
   const token = session.tokens.accessToken.toString();
 
-  const response = await fetch(
-    `${url}/api/projects/${projectId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const response = await fetch(`${url}/api/projects/${projectId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
 
   if (!response.ok) {
     throw new Error("Failed to load project");

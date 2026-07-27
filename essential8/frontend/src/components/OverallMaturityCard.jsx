@@ -8,11 +8,7 @@ export default function OverallMaturityCard({ level }) {
           Maturity
         </Typography>
 
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{ mt: 2, fontWeight: 700 }}
-        >
+        <Typography variant="h3" align="center" sx={{ mt: 2, fontWeight: 700 }}>
           Level {level}
         </Typography>
 
@@ -20,7 +16,7 @@ export default function OverallMaturityCard({ level }) {
           sx={{
             mt: 3,
             display: "flex",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
           }}
         >
           {[0, 1, 2, 3, 4].map((lvl) => (
@@ -36,7 +32,7 @@ export default function OverallMaturityCard({ level }) {
                 backgroundColor: lvl === level ? "#2e7d32" : "#e0e0e0",
                 color: lvl === level ? "white" : "#555",
                 fontWeight: 700,
-                fontSize: "1.2rem"
+                fontSize: "1.2rem",
               }}
             >
               {lvl}

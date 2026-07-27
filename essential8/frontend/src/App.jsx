@@ -39,6 +39,7 @@ import Project from "./Project.jsx";
 import Control from "./components/Control.jsx";
 import Guide from "./Guide.jsx";
 import WizardPage from "./WizardPage.jsx";
+import AdminMfaGuide from "./guides/mfa/AdminMfaGuide.jsx";
 
 function App() {
   const { authenticated } = useAuth();
@@ -126,7 +127,11 @@ function App() {
           }
         />
         <Route path="/project/:projectId/:controlId" element={<Control />} />
-        <Route path="/project/:projectId/:controlId/:guideId" element={<Guide />} />
+        <Route
+          path="/project/:projectId/:controlId/:guideId"
+          element={<Guide />}
+        />
+        <Route path="/test" element={<AdminMfaGuide />} />
       </Routes>
     </>
   );

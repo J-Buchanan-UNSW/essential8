@@ -6,7 +6,7 @@ export default function OrganisationCard({ organisation }) {
       elevation={4}
       sx={{
         borderRadius: 3,
-        p: 1.5
+        p: 1.5,
       }}
     >
       <CardContent>
@@ -32,7 +32,7 @@ function InfoBlock({ label, value }) {
         p: 2,
         borderRadius: 2,
         backgroundColor: "#f5f5f5",
-        border: "1px solid #e0e0e0"
+        border: "1px solid #e0e0e0",
       }}
     >
       <Typography
@@ -40,7 +40,7 @@ function InfoBlock({ label, value }) {
           fontWeight: 700,
           fontSize: "1rem",
           mb: 0.5,
-          color: "#424242"
+          color: "#424242",
         }}
       >
         {label}
@@ -50,7 +50,7 @@ function InfoBlock({ label, value }) {
         sx={{
           fontSize: "1.1rem",
           fontWeight: 500,
-          color: "#212121"
+          color: "#212121",
         }}
       >
         {value}
